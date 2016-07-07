@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Homepage{% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block content %}
-    
+  <h1>Search</h1>
+
+  <form action="/search">
+    <!-- Resource for invisible label to provide accessibility: http://webaim.org/techniques/forms/advanced -->
+    <input id="searchbox" type="search" name="q" aria-label="Find tweets" placeholder="Find tweets">
+    <input type="submit" value="Search">
+  </form>
 {% endblock %}
