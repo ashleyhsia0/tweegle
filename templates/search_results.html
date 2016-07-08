@@ -26,7 +26,7 @@
 
   <h2>Hashtags</h2>
   {% for hashtag in sorted_hashtags %}
-    {{ hashtag.0 }}: {{ hashtag.1 }}
+    <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a>: {{ hashtag.1 }}
   {% endfor %}
 
     
