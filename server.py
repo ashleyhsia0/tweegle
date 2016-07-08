@@ -3,6 +3,17 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
+import os
+
+import tweepy
+
+auth = tweepy.OAuthHandler(os.environ["TWITTER_CONSUMER_KEY"],
+                           os.environ["TWITTER_CONSUMER_SECRET"])
+auth.set_access_token(os.environ["TWITTER_ACCESS_TOKEN_KEY"],
+                      os.environ["TWITTER_ACCESS_TOKEN_SECRET"])
+
+twitter_api = tweepy.API(auth)
+
 app = Flask(__name__)
 app.secret_key = "ABC123"
 
@@ -21,7 +32,14 @@ def index():
 def show_login():
     """Show search results"""
 
-    return render_template("search_results.html")
+    user_query = request.args.get("q")
+
+    tweet_search_results = twitter_api.search(user_query)
+    user_search_results = twitter_api.search_users(user_query)
+
+    return render_template("search_results.html",
+                           tweet_search_results=tweet_search_results,
+                           user_search_results=user_search_results)
 
 
 if __name__ == "__main__":

@@ -3,5 +3,26 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
+  <h1>Search</h1>
+
+  <form action="/search">
+    <!-- Resource for invisible label to provide accessibility: http://webaim.org/techniques/forms/advanced -->
+    <input id="searchbox" type="search" name="q" aria-label="Find tweets" placeholder="Find tweets">
+    <input type="submit" value="Search">
+  </form>
+
+  <h1>Search Results</h2>
+
+  <h2>People</h2>
+  {% for user in user_search_results %}
+    User Handle: {{ user.screen_name }}<br>
+    Member Since: {{ user.created_at }}
+  {% endfor %}
+
+  <h2>Tweets</h2>
+  {% for tweet in tweet_search_results %}
+    Tweet Message: {{ tweet.text }}
+  {% endfor %}
+
     
 {% endblock %}
