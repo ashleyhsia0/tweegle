@@ -24,5 +24,10 @@
     Tweet Message: {{ tweet.text }}
   {% endfor %}
 
+  <h2>Hashtags</h2>
+  {% for hashtag in sorted_hashtags %}
+    {{ hashtag.0 }}: {{ hashtag.1 }}
+  {% endfor %}
+
     
 {% endblock %}

@@ -7,6 +7,8 @@ import os
 
 import tweepy
 
+import operator
+
 auth = tweepy.OAuthHandler(os.environ["TWITTER_CONSUMER_KEY"],
                            os.environ["TWITTER_CONSUMER_SECRET"])
 auth.set_access_token(os.environ["TWITTER_ACCESS_TOKEN_KEY"],
@@ -37,9 +39,19 @@ def show_login():
     tweet_search_results = twitter_api.search(user_query)
     user_search_results = twitter_api.search_users(user_query)
 
+    hashtags = {}
+
+    for tweet in tweet_search_results:
+        for item in tweet.entities['hashtags']:
+            hashtag = item['text']
+            hashtags[hashtag] = hashtags.get(hashtag, 0) + 1
+
+    sorted_hashtags = sorted(hashtags.items(), key=operator.itemgetter(1), reverse=True)
+
     return render_template("search_results.html",
                            tweet_search_results=tweet_search_results,
-                           user_search_results=user_search_results)
+                           user_search_results=user_search_results,
+                           sorted_hashtags=sorted_hashtags)
 
 
 if __name__ == "__main__":
