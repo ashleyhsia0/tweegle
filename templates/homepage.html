@@ -3,11 +3,20 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-  <h1>Search</h1>
-
-  <form action="/search">
-    <!-- Resource for invisible label to provide accessibility: http://webaim.org/techniques/forms/advanced -->
-    <input id="searchbox" type="search" name="q" aria-label="Find tweets" placeholder="Find tweets">
-    <input type="submit" value="Search">
-  </form>
+  <div class="container">
+    <div id="absolute-center">
+      <h1>Tweegle</h1>
+      <form action="/search" class="form-group">
+        <div class="input-group">
+          <!-- Resource for invisible label to provide accessibility: http://webaim.org/techniques/forms/advanced -->
+          <input class="form-control" id="searchbox" type="search" name="q" aria-label="Search for tweets or people from Twitter" placeholder="Search for tweets or people from Twitter">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div><!-- /.input-group -->
+      </form>
+    </div>
+  </div><!-- /.container -->
 {% endblock %}
+
+
