@@ -18,6 +18,10 @@
     }
 }
 
+.glyphicon-search {
+    color: #1DA1F2;
+}
+
 /*SEARCH RESULTS*/
 body { 
     padding-top: 50px; /*Add top padding for fixed nav bar*/
