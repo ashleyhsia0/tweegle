@@ -1,7 +1,7 @@
 /*HOMEPAGE*/
 .jumbotron {
     background-color: #FFFFFF;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 .jumbotron h1 {
@@ -13,8 +13,8 @@
 
 @media screen and (min-width: 768px) {
     .container .jumbotron, .container-fluid .jumbotron {
-        padding-left: 200px;
-        padding-right: 200px;
+        padding-left: 300px;
+        padding-right: 300px;
     }
 }
 
