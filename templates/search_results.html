@@ -43,18 +43,20 @@
             <div class="row">
               {% for user in two_users %}
                 <div class="list-group col-md-6">
-                  <a href="#" class="list-group-item">
+                  <a href="http://twitter.com/{{ user.screen_name }}" class="list-group-item">
                     <div class="media-left">
                       <img class="media-object" src="{{ user.profile_image_url }}" alt="{{ user.name }}'s profile picture">
                     </div>
                     <div class="media-body">
                       <h4 class="media-heading">{{ user.name }} <small>&commat;{{ user.screen_name }}</small></h4>
-                      Location: {{ user.location }}<br>
-                      Description: {{ user.description|truncate(100) }}<!-- Truncate to reduce length of description --><br>
-                      Member Since: {{ user.created_at }}<br>
-                      Tweets: {{ user.statuses_count }}<br>
-                      Followers: {{ user.followers_count }}<br>
-                      Following: {{ user.friends_count }}
+                      <small><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{ user.location or "N/A" }}</small><br>
+                      {{ user.description|truncate(100) }}<!-- Truncate to reduce length of description --><br>
+                      <ul class="list-inline text-right">
+                        <li><b>{{ user.statuses_count }}</b> <small>Tweets</small></li>
+                        <li><b>{{ user.followers_count }}</b> <small>Followers</small></li>
+                        <li><b>{{ user.friends_count }}</b> <small>Following</small></li>
+                      </ul>
+                      
                     </div>
                   </a>
                 </div><!-- /.list-group -->

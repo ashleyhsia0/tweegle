@@ -45,6 +45,10 @@ body {
     }
 }
 
+.list-inline {
+    margin-top: 10px;
+}
+
 #right-col {
     background-color: #f5f8fa;
     height: calc(100vh - 50px); /*Extend to bottom of page*/
