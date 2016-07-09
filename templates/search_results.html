@@ -35,7 +35,7 @@
   <h2>Hashtags</h2>
   {% if sorted_hashtags %}
     {% for hashtag in sorted_hashtags %}
-      <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a>: {{ hashtag.1 }}
+      <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge">{{ hashtag.1 }}</span>
     {% endfor %}
   {% else %}
     No hashtags found.
