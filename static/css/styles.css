@@ -1,12 +1,11 @@
-/*Resource for absolute centering: https://www.smashingmagazine.com/2013/08/absolute-horizontal-vertical-centering-css/*/
-#absolute-center {
-    bottom: 0; 
-    height: 50%;
-    left: 0; 
-    margin: auto;
-    overflow: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%;
+.jumbotron {
+    margin-top: 200px;
+    background-color: #FFFFFF;
+}
+
+@media screen and (min-width: 768px) {
+    .container .jumbotron, .container-fluid .jumbotron {
+        padding-right: 200px;
+        padding-left: 200px;
+    }
 }
