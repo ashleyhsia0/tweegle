@@ -33,35 +33,41 @@
   </nav>
 
   <div class="container">
-    <h1>Search Results</h2>
+    <div class="row">
+      <div class="col-xs-12 col-md-1 col-md-9"><!-- left column -->
+        <h1>Search Results</h2>
 
-    <h2>People</h2>
-    {% if user_search_results %}
-      {% for user in user_search_results %}
-        User Handle: {{ user.screen_name }}<br>
-        Member Since: {{ user.created_at }}
-      {% endfor %}
-    {% else %}
-      No results found.
-    {% endif %}
+        <h2>People</h2>
+        {% if user_search_results %}
+          {% for user in user_search_results %}
+            User Handle: {{ user.screen_name }}<br>
+            Member Since: {{ user.created_at }}
+          {% endfor %}
+        {% else %}
+          No results found.
+        {% endif %}
 
-    <h2>Tweets</h2>
-    {% if tweet_search_results %}
-      {% for tweet in tweet_search_results %}
-        Tweet Message: {{ tweet.text }}
-      {% endfor %}
-    {% else %}
-      No results found.
-    {% endif %}
+        <h2>Tweets</h2>
+        {% if tweet_search_results %}
+          {% for tweet in tweet_search_results %}
+            Tweet Message: {{ tweet.text }}
+          {% endfor %}
+        {% else %}
+          No results found.
+        {% endif %}
+      </div><!-- /left column -->
 
-    <h2>Hashtags</h2>
-    {% if sorted_hashtags %}
-      {% for hashtag in sorted_hashtags %}
-        <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge">{{ hashtag.1 }}</span>
-      {% endfor %}
-    {% else %}
-      No hashtags found.
-    {% endif %}
+      <div class="hidden-xs col-md-2"><!-- right column -->
+        <h2>Hashtags</h2>
+        {% if sorted_hashtags %}
+          {% for hashtag in sorted_hashtags %}
+            <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge">{{ hashtag.1 }}</span>
+          {% endfor %}
+        {% else %}
+          No hashtags found.
+        {% endif %}
+      </div><!-- /right column -->
+    </div>
 
   </div><!-- /.container -->
 {% endblock %}
