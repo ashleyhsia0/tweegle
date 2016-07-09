@@ -22,3 +22,9 @@
 body { 
     padding-top: 70px;
 }
+
+.navbar-form {
+    padding: 0 15px;
+    border-top: none;
+    border-bottom: none;
+}
