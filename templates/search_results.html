@@ -39,12 +39,32 @@
 
         <h2>People</h2>
         {% if user_search_results %}
-          {% for user in user_search_results %}
-            User Handle: {{ user.screen_name }}<br>
-            Member Since: {{ user.created_at }}
+          {% for two_users in user_search_results|slice(2) %}<!-- Slice to have 2 columns -->
+            <div class="row">
+              {% for user in two_users %}
+                <div class="list-group col-md-6">
+                  <a href="#" class="list-group-item">
+                    <div class="media-left">
+                      <img class="media-object" src="{{ user.profile_image_url }}" alt="{{ user.name }}'s profile picture">
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading">{{ user.name }} <small>&commat;{{ user.screen_name }}</small></h4>
+                      Location: {{ user.location }}<br>
+                      Description: {{ user.description|truncate(100) }}<!-- Truncate to reduce length of description --><br>
+                      Member Since: {{ user.created_at }}<br>
+                      Tweets: {{ user.statuses_count }}<br>
+                      Followers: {{ user.followers_count }}<br>
+                      Following: {{ user.friends_count }}
+                    </div>
+                  </a>
+                </div><!-- /.list-group -->
+              {% endfor %}
+            </div><!-- /.row -->
           {% endfor %}
         {% else %}
-          No results found.
+          <p>
+            No results found.
+          </p>
         {% endif %}
 
         <h2>Tweets</h2>
@@ -53,7 +73,9 @@
             Tweet Message: {{ tweet.text }}
           {% endfor %}
         {% else %}
-          No results found.
+          <p>
+            No results found.
+          </p>
         {% endif %}
       </div><!-- /left column -->
 
@@ -71,7 +93,7 @@
           </p>
         {% endif %}
       </div><!-- /right column -->
-    </div>
+    </div><!-- /.row -->
 
   </div><!-- /.container -->
 {% endblock %}
