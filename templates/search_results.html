@@ -57,14 +57,18 @@
         {% endif %}
       </div><!-- /left column -->
 
-      <div class="hidden-xs col-md-2"><!-- right column -->
+      <div class="hidden-xs col-md-2" id="right-col"><!-- right column -->
         <h2>Hashtags</h2>
         {% if sorted_hashtags %}
-          {% for hashtag in sorted_hashtags %}
-            <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge">{{ hashtag.1 }}</span>
-          {% endfor %}
+          <p>
+            {% for hashtag in sorted_hashtags %}
+              <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge">{{ hashtag.1 }}</span><br>
+            {% endfor %}
+          </p>
         {% else %}
-          No hashtags found.
+          <p>
+            No hashtags found.
+          </p>
         {% endif %}
       </div><!-- /right column -->
     </div>

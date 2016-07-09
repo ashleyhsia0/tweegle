@@ -20,7 +20,7 @@
 
 /*SEARCH RESULTS*/
 body { 
-    padding-top: 70px;
+    padding-top: 50px; /*Add top padding for fixed nav bar*/
 }
 
 .navbar-form {
@@ -33,4 +33,9 @@ body {
     .navbar-form .input-group>.form-control {
         width: 600px;
     }
+}
+
+#right-col {
+    background-color: #f5f8fa;
+    height: calc(100vh - 50px); /*Extend to bottom of page*/
 }
