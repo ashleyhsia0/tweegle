@@ -3,6 +3,13 @@
     background-color: #FFFFFF;
 }
 
+.jumbotron h1 {
+    color: #1DA1F2;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
 @media screen and (min-width: 768px) {
     .container .jumbotron, .container-fluid .jumbotron {
         padding-right: 200px;
