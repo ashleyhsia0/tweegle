@@ -32,7 +32,7 @@ def index():
 
 
 @app.route("/search", methods=["GET"])
-def show_login():
+def search():
     """Show search results"""
 
     user_query = request.args.get("q")
