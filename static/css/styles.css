@@ -28,3 +28,9 @@ body {
     border-top: none;
     border-bottom: none;
 }
+
+@media (min-width: 768px) {
+    .navbar-form .input-group>.form-control {
+        width: 600px;
+    }
+}
