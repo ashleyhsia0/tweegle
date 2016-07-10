@@ -46,11 +46,17 @@ body {
 }
 
 .profile-card {
-    height: 150px;
+    height: 155px;
 }
 
 .list-inline {
     margin-top: 10px;
+}
+
+.tweet-stats {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
 }
 
 #right-col {
