@@ -108,7 +108,7 @@
         {% if sorted_hashtags %}
           <p>
             {% for hashtag in sorted_hashtags %}
-              <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge">{{ hashtag.1 }}</span><br>
+              <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge" id="hashtag-count">{{ hashtag.1 }}</span><br>
             {% endfor %}
           </p>
         {% else %}

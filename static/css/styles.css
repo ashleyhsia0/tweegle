@@ -62,3 +62,7 @@ body {
 #right-col {
     background-color: #f5f8fa;
 }
+
+#hashtag-count {
+    float: right;
+}
