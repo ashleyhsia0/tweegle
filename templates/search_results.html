@@ -58,8 +58,7 @@
                         <li><b>{{ user.statuses_count }}</b> <small>Tweets</small></li>
                         <li><b>{{ user.followers_count }}</b> <small>Followers</small></li>
                         <li><b>{{ user.friends_count }}</b> <small>Following</small></li>
-                      </ul>
-                      
+                      </ul> 
                     </div>
                   </a>
                 </div><!-- /.list-group -->
@@ -77,9 +76,9 @@
           <p class="small">
             About {{ tweet_search_results|length }} results
           </p>
-            <div class="row">
-              {% for tweet in tweet_search_results %}
-              <div class="list-group">
+          <div class="row">
+            {% for tweet in tweet_search_results %}
+              <div class="list-group col-xs-12">
                 <a href="http://twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id_str }}" class="list-group-item">
                   <div class="media-left">
                     <img class="media-object" src="{{ tweet.user.profile_image_url }}" alt="{{ tweet.user.name }}'s profile picture">
@@ -96,7 +95,7 @@
                 </a>
               </div><!-- /.list-group -->
             {% endfor %}
-          </div>
+          </div><!-- /.row -->
         {% else %}
           <p>
             No results found.
@@ -118,6 +117,7 @@
           </p>
         {% endif %}
       </div><!-- /right column -->
+
     </div><!-- /.row -->
 
   </div><!-- /.container -->
