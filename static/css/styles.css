@@ -45,6 +45,10 @@ body {
     }
 }
 
+.profile-card {
+    height: 150px;
+}
+
 .list-inline {
     margin-top: 10px;
 }
