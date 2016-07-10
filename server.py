@@ -69,4 +69,4 @@ def search():
 if __name__ == "__main__":
     app.debug = True
     DebugToolbarExtension(app)
-    app.run()
+    app.run(threaded=True)
