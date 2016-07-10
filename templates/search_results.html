@@ -122,16 +122,6 @@
 
   </div><!-- /.container -->
 
-  <script>
-    $(document).ready(function () {
-      var contentHeight = $('#left-col').height()
-      var sidebarHeight = $('#right-col').height()
+  <script src="/static/js/extend-sidebar.js"></script>
 
-      if (contentHeight > sidebarHeight) {
-          $('#right-col').height(contentHeight)
-      } else {
-          $('#right-col').height(sidebarHeight)
-      }
-    });
-  </script>
 {% endblock %}
