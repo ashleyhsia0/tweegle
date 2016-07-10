@@ -34,7 +34,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-md-offset-1 col-md-9"><!-- left column -->
+      <div class="col-xs-12 col-md-offset-1 col-md-9" id="left-col" ><!-- left column -->
         <h1>Search Results</h2>
 
         <h2>People</h2>
@@ -121,4 +121,17 @@
     </div><!-- /.row -->
 
   </div><!-- /.container -->
+
+  <script>
+    $(document).ready(function () {
+      var contentHeight = $('#left-col').height()
+      var sidebarHeight = $('#right-col').height()
+
+      if (contentHeight > sidebarHeight) {
+          $('#right-col').height(contentHeight)
+      } else {
+          $('#right-col').height(sidebarHeight)
+      }
+    });
+  </script>
 {% endblock %}
