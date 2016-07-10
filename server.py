@@ -57,7 +57,7 @@ def search():
             hashtag = item['text']
             hashtags[hashtag] = hashtags.get(hashtag, 0) + 1
 
-    # Sort hashtags based on count in ascending order
+    # Sort hashtags based on count in descending order
     sorted_hashtags = sorted(hashtags.items(), key=operator.itemgetter(1), reverse=True)
 
     return render_template("search_results.html",
