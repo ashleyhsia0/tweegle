@@ -77,9 +77,26 @@
           <p class="small">
             About {{ tweet_search_results|length }} results
           </p>
-          {% for tweet in tweet_search_results %}
-            Tweet Message: {{ tweet.text }}
-          {% endfor %}
+            <div class="row">
+              {% for tweet in tweet_search_results %}
+              <div class="list-group">
+                <a href="http://twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id_str }}" class="list-group-item">
+                  <div class="media-left">
+                    <img class="media-object" src="{{ tweet.user.profile_image_url }}" alt="{{ tweet.user.name }}'s profile picture">
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">{{ tweet.user.name }} <small>&commat;{{ tweet.user.screen_name }}</small></h4>
+                    {{ tweet.text }}<br>
+                    <ul class="list-inline text-right">
+                      <li><small>{{ tweet.created_at|datetimefilter("%b %d %-I:%M%p") }}</small></li>
+                      <li><b>{{ tweet.retweet_count }}</b> <small>Retweets</small></li>
+                      <li><b>{{ tweet.favorite_count }}</b> <small>Favourites</small></li>
+                    </ul>
+                  </div>
+                </a>
+              </div><!-- /.list-group -->
+            {% endfor %}
+          </div>
         {% else %}
           <p>
             No results found.

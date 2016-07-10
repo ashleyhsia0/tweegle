@@ -7,6 +7,7 @@ import os
 import tweepy
 
 import operator
+import datetime
 
 # Set up Tweepy (Twitter API library)
 auth = tweepy.OAuthHandler(os.environ["TWITTER_CONSUMER_KEY"],
@@ -22,6 +23,15 @@ app.secret_key = "ABC123"
 
 # Raise an error for undefined variable in Jinja2, rather than failing silently
 app.jinja_env.undefined = StrictUndefined
+
+
+@app.template_filter()
+def datetimefilter(value, format='%b %d'):
+    """Convert a datetime to a different format so it can be accessible in Jinja."""
+
+    return value.strftime(format)
+
+app.jinja_env.filters['datetimefilter'] = datetimefilter
 
 
 @app.route('/')
