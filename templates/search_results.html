@@ -39,6 +39,9 @@
 
         <h2>People</h2>
         {% if user_search_results %}
+          <p class="small">
+            About {{ user_search_results|length }} results
+          </p>
           {% for two_users in user_search_results|slice(2) %}<!-- Slice to have 2 columns -->
             <div class="row">
               {% for user in two_users %}
@@ -71,6 +74,9 @@
 
         <h2>Tweets</h2>
         {% if tweet_search_results %}
+          <p class="small">
+            About {{ tweet_search_results|length }} results
+          </p>
           {% for tweet in tweet_search_results %}
             Tweet Message: {{ tweet.text }}
           {% endfor %}
