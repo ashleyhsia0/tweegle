@@ -1,13 +1,12 @@
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash
+from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 
 import os
 import tweepy
 
 import operator
-import datetime
 
 # Set up Tweepy (Twitter API library)
 auth = tweepy.OAuthHandler(os.environ["TWITTER_CONSUMER_KEY"],
