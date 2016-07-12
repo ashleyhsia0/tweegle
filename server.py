@@ -46,8 +46,10 @@ def search():
 
     user_query = request.args.get("q")
 
-    tweet_search_results = twitter_api.search(user_query)
-    user_search_results = twitter_api.search_users(user_query)
+    # tweet_search_results = twitter_api.search(user_query)  # Default is 20
+    # user_search_results = twitter_api.search_users(user_query)  # Default is 15
+    tweet_search_results = [tweet for tweet in tweepy.Cursor(twitter_api.search, q=user_query).items(200)]
+    user_search_results = [user for user in tweepy.Cursor(twitter_api.search_users, q=user_query).items(100)]
 
     hashtags = {}
 
