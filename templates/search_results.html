@@ -33,7 +33,7 @@
   </nav>
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" ng-init="tweets={{ json_tweets }}; users={{ json_users }}; hashtags={{ json_hashtags }}">
       <div class="col-xs-12 col-md-offset-1 col-md-8" id="left-col" ><!-- left column -->
 
         <!-- Nav tabs to switch between tweets and people for the search results -->
@@ -45,90 +45,71 @@
         <!-- Tab panes for search results (tweets and people) -->
         <div class="tab-content">
 
-          <div role="tabpanel" class="tab-pane active" id="tweets">
-            {% if tweet_search_results %}
-              <p class="small">
-                About {{ tweet_search_results|length }} results
-              </p>
+          <div role="tabpanel" class="tab-pane active" id="tweets" ng-controller="tweetsController">
+            
               <div class="row">
-                {% for tweet in tweet_search_results %}
-                  <div class="list-group col-xs-12">
-                    <a href="http://twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id_str }}" class="list-group-item">
+                
+                  <div class="list-group col-xs-12" ng-repeat="tweet in tweets">
+                    <a ng-href="http://twitter.com/{[{ tweet.userHandle }]}/status/{[{ tweet.id }]}" class="list-group-item">
                       <div class="media-left">
-                        <img class="media-object" src="{{ tweet.user.profile_image_url }}" alt="{{ tweet.user.name }}'s profile picture">
+                        <img class="media-object" ng-src="{[{ tweet.userProfileImg }]}" alt="{[{ tweet.userName }]}'s profile picture">
                       </div>
                       <div class="media-body">
-                        <h4 class="media-heading">{{ tweet.user.name }} <small>&commat;{{ tweet.user.screen_name }}</small></h4>
-                        {{ tweet.text }}<br>
+                        <h4 class="media-heading">name: {[{ tweet.userName }]} <small>&commat;{[{ tweet.userHandle }]}</small></h4>
+                        {[{ tweet.text }]}<br>
                         <ul class="list-inline text-right">
-                          <li><small>{{ tweet.created_at|datetimefilter("%b %d %-I:%M%p") }}</small></li>
-                          <li><b>{{ tweet.retweet_count }}</b> <small>Retweets</small></li>
-                          <li><b>{{ tweet.favorite_count }}</b> <small>Favourites</small></li>
+                          <li><small>{[{ tweet.date }]}</small></li>
+                          <li><b>{[{ tweet.numRetweets }]}</b> <small>Retweets</small></li>
+                          <li><b>{[{ tweet.numFavorites }]}</b> <small>Favourites</small></li>
                         </ul>
                       </div>
                     </a>
                   </div><!-- /.list-group -->
-                {% endfor %}
+                
               </div><!-- /.row -->
-            {% else %}
-              <p>
-                No results found.
-              </p>
-            {% endif %}
+            
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="people">
-            {% if user_search_results %}
-              <p class="small">
-                About {{ user_search_results|length }} results
-              </p>
-              {% for two_users in user_search_results|slice(2) %}<!-- Slice to have 2 columns -->
-                <div class="row">
-                  {% for user in two_users %}
-                    <div class="list-group col-md-6">
-                      <a href="http://twitter.com/{{ user.screen_name }}" class="list-group-item profile-card">
+          <div role="tabpanel" class="tab-pane" id="people" ng-controller="usersController">
+            
+              
+                <div class="row" ng-repeat="users in slicedTwoUsers">
+                  
+                    <div class="list-group col-md-6" ng-repeat="user in users">
+                      <a ng-href="http://twitter.com/{[{ user.handle }]}" class="list-group-item profile-card">
                         <div class="media-left">
-                          <img class="media-object" src="{{ user.profile_image_url }}" alt="{{ user.name }}'s profile picture">
+                          <img class="media-object" ng-src="{[{ user.profileImg }]}" alt="{[{ user.name }]}'s profile picture">
                         </div>
                         <div class="media-body">
-                          <h4 class="media-heading">{{ user.name }} <small>&commat;{{ user.screen_name }}</small></h4>
-                          <small><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{ user.location or "N/A" }}</small><br>
-                          {{ user.description|truncate(150) }}<!-- Truncate to reduce length of description --><br>
+                          <h4 class="media-heading">{[{ user.name }]} <small>&commat;{[{ user.handle }]}</small></h4>
+                          <small><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {[{ user.location }]}</small><br>
+                          {[{ user.description }]}<!-- Truncate to reduce length of description --><br>
                           <ul class="list-inline tweet-stats">
-                            <li><b>{{ user.statuses_count }}</b> <small>Tweets</small></li>
-                            <li><b>{{ user.followers_count }}</b> <small>Followers</small></li>
-                            <li><b>{{ user.friends_count }}</b> <small>Following</small></li>
+                            <li><b>{[{ user.numTweets }]}</b> <small>Tweets</small></li>
+                            <li><b>{[{ user.numFollowers }]}</b> <small>Followers</small></li>
+                            <li><b>{[{ user.numFollowing }]}</b> <small>Following</small></li>
                           </ul> 
                         </div>
                       </a>
                     </div><!-- /.list-group -->
-                  {% endfor %}
+                  
                 </div><!-- /.row -->
-              {% endfor %}
-            {% else %}
-              <p>
-                No results found.
-              </p>
-            {% endif %}
+              
           </div>
         </div>
 
       </div><!-- /left column -->
 
-      <div class="hidden-xs col-md-offset-1 col-md-2" id="right-col"><!-- right column -->
+      <div class="hidden-xs col-md-offset-1 col-md-2" id="right-col" ng-controller="hashtagsController"><!-- right column -->
         <div id="hashtags-bar">
           <h2>Hashtags</h2>
-          {% if sorted_hashtags %}
-            <p>
-              {% for hashtag in sorted_hashtags %}
-                <a href="/search?q=%23{{ hashtag.0 }}">&num;{{ hashtag.0 }}</a> <span class="badge" id="hashtag-count">{{ hashtag.1 }}</span><br>
-              {% endfor %}
-            </p>
-          {% else %}
-            <p>
-              No hashtags found.
-            </p>
-          {% endif %}
+          
+            <div ng-repeat="hashtag in hashtags">
+              
+                <a ng-href="/search?q=%23{[{ hashtag.name }]}">&num;{[{ hashtag.name }]}</a> <span class="badge" id="hashtag-count">{[{ hashtag.count }]}</span>
+              
+            </div>
+          
         </div>
       </div><!-- /right column -->
 

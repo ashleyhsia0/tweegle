@@ -5,6 +5,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from twitter_api_call import fetch_results, fetch_hashtags
 
+from angular_data import jsonify_tweets, jsonify_users, jsonify_hashtags
+
 # Set up Flask web app
 app = Flask(__name__)
 app.secret_key = "ABC123"
@@ -41,10 +43,23 @@ def search():
     # Get hashtags for tweets retrieved
     sorted_hashtags = fetch_hashtags(tweet_search_results)
 
+    # Make JSONs to pass data to Angular
+    json_tweets = jsonify_tweets(tweet_search_results)
+    json_users = jsonify_users(user_search_results)
+    json_hashtags = jsonify_hashtags(sorted_hashtags)
+
     return render_template("search_results.html",
-                           tweet_search_results=tweet_search_results,
+                           json_tweets=json_tweets,
+                           json_users=json_users,
+                           json_hashtags=json_hashtags,
                            user_search_results=user_search_results,
                            sorted_hashtags=sorted_hashtags)
+
+
+    # return render_template("search_results.html",
+    #                        tweet_search_results=tweet_search_results,
+    #                        user_search_results=user_search_results,
+    #                        sorted_hashtags=sorted_hashtags)
 
 
 if __name__ == "__main__":
