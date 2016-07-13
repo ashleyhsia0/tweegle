@@ -32,8 +32,8 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container-fluid">
-    <div class="row" ng-init="tweets={{ json_tweets }}; users={{ json_users }}; hashtags={{ json_hashtags }}">
+  <div class="container-fluid" ng-init="tweets={{ json_tweets }}; users={{ json_users }}; hashtags={{ json_hashtags }}">
+    <div class="row" ng-controller="myController">
       <div class="col-xs-12 col-md-offset-1 col-md-8" id="left-col" ><!-- left column -->
 
         <!-- Nav tabs to switch between tweets and people for the search results -->
@@ -45,7 +45,7 @@
         <!-- Tab panes for search results (tweets and people) -->
         <div class="tab-content">
 
-          <div role="tabpanel" class="tab-pane active" id="tweets" ng-controller="tweetsController">
+          <div role="tabpanel" class="tab-pane active" id="tweets">
             
               <div class="row">
                 
@@ -70,7 +70,7 @@
             
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="people" ng-controller="usersController">
+          <div role="tabpanel" class="tab-pane" id="people">
             
               
                 <div class="row" ng-repeat="users in slicedTwoUsers">
@@ -100,7 +100,7 @@
 
       </div><!-- /left column -->
 
-      <div class="hidden-xs col-md-offset-1 col-md-2" id="right-col" ng-controller="hashtagsController"><!-- right column -->
+      <div class="hidden-xs col-md-offset-1 col-md-2" id="right-col"><!-- right column -->
         <div id="hashtags-bar">
           <h2>Hashtags</h2>
           
