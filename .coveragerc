@@ -1,0 +1,11 @@
+# Config file for coverage
+[run]
+branch = True
+omit =
+    env/*
+    twitterenv/*
+    twitter_api.py
+source = .
+[report]
+exclude_lines =
+    if __name__ == .__main__.: 
