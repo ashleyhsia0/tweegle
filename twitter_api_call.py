@@ -17,8 +17,8 @@ def fetch_results(user_query):
     """
     Fetch search results from Tweepy/Twitter API based on user query.
 
-    Return 200 tweets (Twitter default is set to 20).
-    Return 100 users (Twitter default is set to 15).
+    Return 200 Tweepy tweet objects (Twitter default is set to 20).
+    Return 100 Tweepy user objects (Twitter default is set to 15).
     """
 
     tweet_search_results = [tweet for tweet in tweepy.Cursor(twitter_api.search, q=user_query).items(200)]
@@ -28,7 +28,7 @@ def fetch_results(user_query):
 
 
 def fetch_hashtags(tweets):
-    """Get all hashtags for tweets, along with the count, sorted in descending order based on the count."""
+    """Get all hashtags for Tweepy tweet objects, sorted in descending order based on count."""
 
     hashtags = {}
 
