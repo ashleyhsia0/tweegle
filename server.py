@@ -3,18 +3,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 
-import os
-import tweepy
-
-import operator
-
-# Set up Tweepy (Twitter API library)
-auth = tweepy.OAuthHandler(os.environ["TWITTER_CONSUMER_KEY"],
-                           os.environ["TWITTER_CONSUMER_SECRET"])
-auth.set_access_token(os.environ["TWITTER_ACCESS_TOKEN_KEY"],
-                      os.environ["TWITTER_ACCESS_TOKEN_SECRET"])
-
-twitter_api = tweepy.API(auth)
+from twitter_api_call import fetch_results, fetch_hashtags
 
 # Set up Flask web app
 app = Flask(__name__)
@@ -46,20 +35,11 @@ def search():
 
     user_query = request.args.get("q")
 
-    # tweet_search_results = twitter_api.search(user_query)  # Default is 20
-    # user_search_results = twitter_api.search_users(user_query)  # Default is 15
-    tweet_search_results = [tweet for tweet in tweepy.Cursor(twitter_api.search, q=user_query).items(200)]
-    user_search_results = [user for user in tweepy.Cursor(twitter_api.search_users, q=user_query).items(100)]
+    # Get results for tweets and users from Twitter based on user query
+    tweet_search_results, user_search_results = fetch_results(user_query)
 
-    hashtags = {}
-
-    for tweet in tweet_search_results:
-        for item in tweet.entities['hashtags']:
-            hashtag = item['text']
-            hashtags[hashtag] = hashtags.get(hashtag, 0) + 1
-
-    # Sort hashtags based on count in descending order
-    sorted_hashtags = sorted(hashtags.items(), key=operator.itemgetter(1), reverse=True)
+    # Get hashtags for tweets retrieved
+    sorted_hashtags = fetch_hashtags(tweet_search_results)
 
     return render_template("search_results.html",
                            tweet_search_results=tweet_search_results,
