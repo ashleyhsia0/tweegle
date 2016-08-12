@@ -35,8 +35,12 @@ def search():
 
     user_query = request.args.get("q")
 
-    # Get results for tweets and users from Twitter based on user query
-    tweet_search_results, user_search_results = fetch_results(user_query)
+    # Try to get results for tweets and users from Twitter based on user query
+    try:
+        tweet_search_results, user_search_results = fetch_results(user_query)
+
+    except:
+        return render_template("error.html")
 
     # Get hashtags for tweets retrieved
     sorted_hashtags = fetch_hashtags(tweet_search_results)
